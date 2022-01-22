@@ -27,7 +27,7 @@ The analysis of the project was completed using python to open, analyze and outp
 ### Election Audit Results
 
 A summary of the output of the python code contained in PyPoll.py is shown below.
-![Command Line output produced by PyPoll.py for the election audit](Resources/commandline_output.png)
+![Command Line output produced by PyPoll.py for the election audit](analysis/commandline_output.png)
 
 ### Summary of Results
 - The total amount of votes cast in the election was 369,711 votes.
