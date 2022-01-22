@@ -16,42 +16,46 @@ The purpose of this project is to complete an election audit of a recent congres
 7. The percentage of votes from each county out of the total count
 8. The county with the highest turnout
 
+The analysis of the project was completed using python to open, analyze and output the data to determine the results of the election and each goal.
+
 ## Resources Used
 - Data Source: election_results.csv
 - Software: Python 3.7.6, Visual Studio Code 1.63.2
 
 ## Analysis and Results
 
-### Analysis of Refractored Changes
- 
-An example of the code is shown below.
+### Election Audit Results
+
+A summary of the output of the python code contained in PyPoll.py is shown below.
+![Command Line output produced by PyPoll.py for the election audit](Resources/commandline_output.png)
+
+### Summary of Results
+- The total amount of votes cast in the election was 369,711 votes.
+- Of the counties, Jefferson made 10.5% of the votes with 38,855 votes cast, Denver County made 82.8% of the votes with 306,055 votes cast and Arapahoe made 6.7% of the votes with 24,801 votes cast.
+- As such, Denver was determined to have cast the largest amount of votes.
+-  Of the candidates, Charles Casper Stockham recieved 23.0% of the votes with 85,213 votes, Diana DeGette 73.8% of the votes with 272,892 votes and the last candidate Raymon Anthony Doane recieved 3.1% of the votes with 11,606 votes.
+- Diana DeGette was determined to be the winner of the elections, recieving 73.8% of the votes with 272,892 votes cast for them.
+
+## Election Audit Summary
+
+While a good portion of the ode used can be applied to other elections, there are some considerations to be made for applying it to future analyses. One such consideration is how the script currently imports data from the provided csv, as shown below.
 
 ```
-    tickerVolumes(tickerIndex) = tickerVolumes(tickerIndex) + Cells(i, 8).Value
-    
-    If Cells(i - 1, 1).Value <> tickers(tickerIndex) And Cells(i, 1).Value = tickers(tickerIndex) Then
-       tickerStartingPrices(tickerIndex) = Cells(i, 6).Value
-    End If
-    
-    If Cells(i + 1, 1).Value <> tickers(tickerIndex) And Cells(i, 1).Value = tickers(tickerIndex) Then
-        tickerEndingPrices(tickerIndex) = Cells(i, 6).Value
-        tickerIndex = tickerIndex + 1
-    End If
+# Get the candidate name from each row.
+        candidate_name = row[2]
+
+        #get county name
+        county_name = row[1]
 ```
 
-### Results of Refractored Changes using Timer
+The script relies on specific data being in specific columns. For all future analyses, either the csv file needs to be adjusted to ensure the candidate and county names remain in the same columns, or that the code itself needs to be adjusted to match the csv file provided. 
 
+Assuming this can be completed, the code should be able to run with any amount of counties and candidate options.
 
-The original code produced these results for 2017 and 2018.
-![2017 Timer Results Using Original Code](Resources/OriginalCode_2017.png)
-![2018 Timer Results Using Original Code](Resources/OriginalCode_2018.png)
+Another change that can be run that should rarely be an issue is dealing the result of a draw. While this would be uncommon for an election of this size, it could be an issue if the code is used for voting on a smaller scale, such as an internal vote where the pool of voters is much smaller then over 300 thousand voters. Based on the current code, in the event of a tie, the candidate who recieved their first vote earliest in the csv file would be declared the 'winner', as the code only checks for whether the count is greater, and not in the rare event it is equal.
 
-The refactored code produced these results for 2017 and 2018.
-![2017 Timer Results Using Refactored Code](Resources/VBA_Challenge_2017.png)
-![2018 Timer Results Using Refactored Code](Resources/VBA_Challenge_2018.png)
+``` 
+if (votes > winning_count) and (vote_percentage > winning_percentage):
+```
 
-Comparing the results, it is shown that the refactored code was in fact faster then the original code.
-
-
-## Summary
-
+Some code and conditional statements could be added to account for this rare occasion to make it prepared for the rare chance.
